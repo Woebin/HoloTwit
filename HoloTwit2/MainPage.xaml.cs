@@ -100,6 +100,11 @@ namespace HoloTwit2
             TwitterLoginButton.Visibility = Visibility.Visible;
             FeedBladeView.Visibility = Visibility.Collapsed;
         }
+
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            SearchPanel.IsPaneOpen = !SearchPanel.IsPaneOpen;
+        }
     }
 
 }
