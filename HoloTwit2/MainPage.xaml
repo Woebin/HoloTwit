@@ -36,7 +36,8 @@
                             Content="&#xE700;" 
                             FontSize="36" 
                             MinHeight="36"
-                            Click="HamburgerButton_Click" />
+                            Click="HamburgerButton_Click"
+                            ToolTipService.ToolTip="Open menu"/>
 
                     <StackPanel Orientation="Horizontal">
                         <Button Name="SearchButton" 
@@ -45,7 +46,8 @@
                                 FontFamily="Segoe MDL2 Assets"
                                 Content="&#xE11A;"
                                 FontSize="36"
-                                MinHeight="36"/>
+                                MinHeight="36"
+                                ToolTipService.ToolTip="Search"/>
 
                         <TextBox Name="SearchField" 
                                  FontSize="22"
@@ -62,7 +64,8 @@
                             FontFamily="Segoe MDL2 Assets"
                             FontSize="36"
                             MinHeight="36"
-                            Content="&#xEC25;"/>
+                            Content="&#xEC25;"
+                            ToolTipService.ToolTip="Log out"/>
 
                 </StackPanel>
             </SplitView.Pane>
@@ -74,7 +77,8 @@
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Stretch"
                 Visibility="Visible"
-                Margin="35, 35, 35, 35"/>
+                Margin="35, 35, 35, 35"
+                ToolTipService.ToolTip="Sign in to Twitter"/>
 
     </Grid>
 

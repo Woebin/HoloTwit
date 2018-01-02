@@ -5,12 +5,6 @@
 using Microsoft.Toolkit.Uwp.Services.Twitter;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using Windows.ApplicationModel.Core;
-using Windows.UI.Core;
-using Windows.UI.Popups;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -28,15 +22,11 @@ namespace HoloTwit2
 
             if (IsTwitterAccountActive())
             {
-                SearchPanel.Visibility = Visibility.Visible;
-                TwitterLoginButton.Visibility = Visibility.Collapsed;
-                FeedBladeView.Visibility = Visibility.Visible;
+                ShowMainInterface();
             }
             else
             {
-                SearchPanel.Visibility = Visibility.Collapsed;
-                TwitterLoginButton.Visibility = Visibility.Visible;
-                FeedBladeView.Visibility = Visibility.Collapsed;
+                HideMainInterface();
             }
         }
 
@@ -59,9 +49,7 @@ namespace HoloTwit2
             TwitterService.Instance.Initialize(ConsumerKey, ConsumerSecret, CallbackUri);
             if (await TwitterService.Instance.LoginAsync())
             {
-                SearchPanel.Visibility = Visibility.Visible;
-                TwitterLoginButton.Visibility = Visibility.Collapsed;
-                FeedBladeView.Visibility = Visibility.Visible;
+                ShowMainInterface();
             }
         }
 
@@ -96,14 +84,27 @@ namespace HoloTwit2
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             TwitterService.Instance.Logout();
-            SearchPanel.Visibility = Visibility.Collapsed;
-            TwitterLoginButton.Visibility = Visibility.Visible;
-            FeedBladeView.Visibility = Visibility.Collapsed;
+            HideMainInterface();
         }
 
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             SearchPanel.IsPaneOpen = !SearchPanel.IsPaneOpen;
+        }
+
+        private void ShowMainInterface()
+        {
+            SearchPanel.Visibility = Visibility.Visible;
+            SearchPanel.IsPaneOpen = true;
+            TwitterLoginButton.Visibility = Visibility.Collapsed;
+            FeedBladeView.Visibility = Visibility.Visible;
+        }
+
+        private void HideMainInterface()
+        {
+            SearchPanel.Visibility = Visibility.Collapsed;
+            TwitterLoginButton.Visibility = Visibility.Visible;
+            FeedBladeView.Visibility = Visibility.Collapsed;
         }
     }
 

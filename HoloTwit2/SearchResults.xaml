@@ -17,21 +17,24 @@
                     Width="133"
                     VerticalAlignment="Top" 
                     Click="RefreshFeedButton_Click" 
-                    Content="Refresh feed" />
+                    Content="Refresh feed" 
+                    ToolTipService.ToolTip="Resend search query and update results"/>
 
             <ToggleButton x:Name="AutoRefreshToggle" 
                           Content="Autorefresh" 
                           Width="134"
                           Height="32" 
                           VerticalAlignment="Top" 
-                          Click="AutoRefreshToggle_Click"/>
+                          Click="AutoRefreshToggle_Click"
+                          ToolTipService.ToolTip="Toggle automatic updating of results"/>
 
             <Button x:Name="DetachButton"
                     Content="Detach"
                     VerticalAlignment="Top"
                     Width="133"
                     Height="32"
-                    Click="DetachButton_Click"/>
+                    Click="DetachButton_Click"
+                    ToolTipService.ToolTip="Open results in new window"/>
             
         </StackPanel>
 
