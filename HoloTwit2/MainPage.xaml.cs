@@ -54,7 +54,7 @@ namespace HoloTwit2
             }
         }
 
-        private async void TwitterLoginButton_OnClick(object sender, RoutedEventArgs e)
+        private async void TwitterLoginButton_Click(object sender, RoutedEventArgs e)
         {
             TwitterService.Instance.Initialize(ConsumerKey, ConsumerSecret, CallbackUri);
             if (await TwitterService.Instance.LoginAsync())
@@ -79,7 +79,7 @@ namespace HoloTwit2
             }
         }
 
-        private void SearchButton_OnClick(object sender, RoutedEventArgs e)
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             Search();
         }

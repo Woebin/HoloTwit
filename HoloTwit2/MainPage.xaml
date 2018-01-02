@@ -41,13 +41,14 @@
                     <StackPanel Orientation="Horizontal">
                         <Button Name="SearchButton" 
                                 Margin="0, 0, 5, 0" 
-                                Click="SearchButton_OnClick" 
+                                Click="SearchButton_Click" 
                                 FontFamily="Segoe MDL2 Assets"
                                 Content="&#xE11A;"
                                 FontSize="36"
                                 MinHeight="36"/>
 
                         <TextBox Name="SearchField" 
+                                 FontSize="22"
                                  Margin="5, 5, 5, 0"  
                                  MinWidth="140" 
                                  MinHeight="36"
@@ -68,7 +69,7 @@
         </SplitView>
 
         <Button Name="TwitterLoginButton" 
-                Click="TwitterLoginButton_OnClick"
+                Click="TwitterLoginButton_Click"
                 Content="Log in" 
                 HorizontalAlignment="Stretch" 
                 VerticalAlignment="Stretch"
