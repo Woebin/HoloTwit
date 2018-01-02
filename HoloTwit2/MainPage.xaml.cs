@@ -95,7 +95,6 @@ namespace HoloTwit2
         private void ShowMainInterface()
         {
             SearchPanel.Visibility = Visibility.Visible;
-            SearchPanel.IsPaneOpen = true;
             TwitterLoginButton.Visibility = Visibility.Collapsed;
             FeedBladeView.Visibility = Visibility.Visible;
         }
