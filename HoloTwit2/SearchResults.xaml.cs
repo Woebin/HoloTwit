@@ -69,25 +69,25 @@ namespace HoloTwit2
 
         // Open selected feed in new window.
         // Based on https://social.msdn.microsoft.com/Forums/sqlserver/en-US/f1328991-b5e5-48e1-b4ff-536a0013ef9f/uwpis-it-possible-to-open-a-new-window-in-uwp-apps?forum=wpdevelop
-        private async void DetachButton_Click(object sender, RoutedEventArgs e)
+        public async Task DetachFeed()
         {
             var currentApplicationView = ApplicationView.GetForCurrentView();
             var newApplicationView = CoreApplication.CreateNewView();
             await newApplicationView.Dispatcher.RunAsync(CoreDispatcherPriority.Normal, async () =>
-                            {
-                                var newWindow = Window.Current;
-                                var newAppView = ApplicationView.GetForCurrentView();
-                                newAppView.Title = SearchTerm;
+            {
+                var newWindow = Window.Current;
+                var newAppView = ApplicationView.GetForCurrentView();
+                newAppView.Title = SearchTerm;
 
-                                newWindow.Content = new SearchResults(SearchTerm);
-                                newWindow.Activate();
+                newWindow.Content = new SearchResults(SearchTerm);
+                newWindow.Activate();
 
-                                await ApplicationViewSwitcher.TryShowAsStandaloneAsync(
-                                    newAppView.Id,
-                                    ViewSizePreference.UseMinimum,
-                                    currentApplicationView.Id,
-                                    ViewSizePreference.UseMinimum);
-                            });
+                await ApplicationViewSwitcher.TryShowAsStandaloneAsync(
+                    newAppView.Id,
+                    ViewSizePreference.UseMinimum,
+                    currentApplicationView.Id,
+                    ViewSizePreference.UseMinimum);
+            });
         }
     }
 }

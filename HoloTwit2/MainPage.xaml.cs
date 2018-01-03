@@ -53,17 +53,12 @@ namespace HoloTwit2
             }
         }
 
-        private void Search()
+        private async void Search()
         {
             if (!string.IsNullOrWhiteSpace(SearchField.Text) && !string.IsNullOrEmpty(SearchField.Text))
             {
-                BladeItem bladeItem = new BladeItem
-                {
-                    Title = SearchField.Text,
-                    IsExpanded = false,
-                    Content = new SearchResults(SearchField.Text)
-                };
-                FeedBladeView.Items.Add(bladeItem);
+                SearchResults searchResults = new SearchResults(SearchField.Text);
+                await searchResults.DetachFeed();
             }
         }
 
@@ -87,23 +82,16 @@ namespace HoloTwit2
             HideMainInterface();
         }
 
-        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
-        {
-            SearchPanel.IsPaneOpen = !SearchPanel.IsPaneOpen;
-        }
-
         private void ShowMainInterface()
         {
             SearchPanel.Visibility = Visibility.Visible;
             TwitterLoginButton.Visibility = Visibility.Collapsed;
-            FeedBladeView.Visibility = Visibility.Visible;
         }
 
         private void HideMainInterface()
         {
             SearchPanel.Visibility = Visibility.Collapsed;
             TwitterLoginButton.Visibility = Visibility.Visible;
-            FeedBladeView.Visibility = Visibility.Collapsed;
         }
     }
 

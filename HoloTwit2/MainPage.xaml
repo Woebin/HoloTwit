@@ -9,39 +9,21 @@
   mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Grid Name="SearchPanel" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
 
-        <controls:BladeView Name="FeedBladeView" 
-                            Margin="60,10,10,10"
-                            HorizontalAlignment="Stretch" 
-                            VerticalAlignment="Stretch"
-                            Visibility="Collapsed">
-
-            <controls:BladeItem x:Name="DummyBlade" 
-                                IsOpen="False" />
-
-        </controls:BladeView>
-
-        <RelativePanel>
-        </RelativePanel>
-
-        <SplitView Name="SearchPanel" 
-                   DisplayMode="CompactOverlay" 
-                   OpenPaneLength="250" 
-                   CompactPaneLength="60" 
-                   HorizontalAlignment="Left">
-            <SplitView.Pane>
-                <StackPanel Orientation="Vertical">
-                    <Button Name="HamburgerButton" 
-                            FontFamily="Segoe MDL2 Assets" 
-                            Content="&#xE700;" 
-                            FontSize="36" 
-                            MinHeight="36"
-                            Click="HamburgerButton_Click"
-                            ToolTipService.ToolTip="Open menu"/>
-
-                    <StackPanel Orientation="Horizontal">
-                        <Button Name="SearchButton" 
-                                Margin="0, 0, 5, 0" 
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <TextBox Name="SearchField" 
+                                 FontSize="22"
+                                 Margin="5, 5, 5, 0"  
+                                 MinWidth="140" 
+                                 Height="36"
+                                 KeyUp="SearchField_KeyUp"/>
+                <Button Name="SearchButton" 
+                                Margin="0, 5, 5, 0" 
                                 Click="SearchButton_Click" 
                                 FontFamily="Segoe MDL2 Assets"
                                 Content="&#xE11A;"
@@ -49,27 +31,20 @@
                                 MinHeight="36"
                                 ToolTipService.ToolTip="Search"/>
 
-                        <TextBox Name="SearchField" 
-                                 FontSize="22"
-                                 Margin="5, 5, 5, 0"  
-                                 MinWidth="140" 
-                                 MinHeight="36"
-                                 Width="156" 
-                                 KeyUp="SearchField_KeyUp"/>
-                    </StackPanel>
+            </StackPanel>
 
-                    <Button Name="LogoutButton"
+            <Button Name="LogoutButton"
                             Margin="0,0, 5, 0" 
                             Click="LogoutButton_Click" 
                             FontFamily="Segoe MDL2 Assets"
                             FontSize="36"
                             MinHeight="36"
                             Content="&#xEC25;"
-                            ToolTipService.ToolTip="Log out"/>
+                            ToolTipService.ToolTip="Log out"
+                    HorizontalAlignment="Right"
+                    Grid.Row="1"/>
 
-                </StackPanel>
-            </SplitView.Pane>
-        </SplitView>
+        </Grid>
 
         <Button Name="TwitterLoginButton" 
                 Click="TwitterLoginButton_Click"
