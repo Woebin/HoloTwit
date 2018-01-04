@@ -34,7 +34,7 @@
             </StackPanel>
 
             <Button Name="LogoutButton"
-                            Click="LogoutButton_Click" 
+                            Click="TwitterLogoutButton_Click" 
                             FontFamily="Segoe MDL2 Assets"
                             FontSize="36"
                             MinHeight="36"

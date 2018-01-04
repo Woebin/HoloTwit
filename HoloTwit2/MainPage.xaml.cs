@@ -5,6 +5,7 @@
 using Microsoft.Toolkit.Uwp.Services.Twitter;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -50,6 +51,9 @@ namespace HoloTwit2
             if (await TwitterService.Instance.LoginAsync())
             {
                 ShowMainInterface();
+            } else {
+                var msg = new MessageDialog("Login failed", "Error");
+                await msg.ShowAsync();
             }
         }
 
@@ -76,7 +80,7 @@ namespace HoloTwit2
             }
         }
 
-        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        private void TwitterLogoutButton_Click(object sender, RoutedEventArgs e)
         {
             TwitterService.Instance.Logout();
             HideMainInterface();
