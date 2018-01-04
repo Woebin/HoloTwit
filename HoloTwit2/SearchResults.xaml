@@ -14,7 +14,7 @@
 
             <Button x:Name="RefreshFeedButton" 
                     Height="32" 
-                    Width="200"
+                    Width="133"
                     VerticalAlignment="Top" 
                     Click="RefreshFeedButton_Click" 
                     Content="Refresh feed" 
@@ -22,11 +22,19 @@
 
             <ToggleButton x:Name="AutoRefreshToggle" 
                           Content="Autorefresh" 
-                          Width="200"
+                          Width="134"
                           Height="32" 
                           VerticalAlignment="Top" 
                           Click="AutoRefreshToggle_Click"
                           ToolTipService.ToolTip="Toggle automatic updating of results"/>
+
+            <Button x:Name="RandomizeBackgroundButton" 
+                    Height="32" 
+                    Width="133"
+                    VerticalAlignment="Top" 
+                    Click="RandomizeBackgroundButton_Click" 
+                    Content="New color" 
+                    ToolTipService.ToolTip="Randomize background color"/>
 
         </StackPanel>
 

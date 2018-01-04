@@ -17,10 +17,6 @@ namespace HoloTwit2
         private string ConsumerSecret { get; set; } = "PLACESECRETHERE";
         private string CallbackUri { get; set; } = "http://faketrash.placeholder.cx";
 
-        private List<int> usedColors = new List<int>();
-        private int usedColorsCounter = 0;
-        private Random r = new Random();
-
         public MainPage()
         {
             this.InitializeComponent();
@@ -67,7 +63,7 @@ namespace HoloTwit2
         {
             if (!string.IsNullOrWhiteSpace(SearchField.Text) && !string.IsNullOrEmpty(SearchField.Text))
             {
-                SearchResults searchResults = new SearchResults(SearchField.Text, GetColors());
+                SearchResults searchResults = new SearchResults(SearchField.Text);
                 await searchResults.DetachFeed();
             }
         }
@@ -102,18 +98,6 @@ namespace HoloTwit2
         {
             SearchPanel.Visibility = Visibility.Collapsed;
             TwitterLoginButton.Visibility = Visibility.Visible;
-        }
-
-        public int GetColors()
-        {
-            if (usedColorsCounter >= 10)
-                return -1;
-            int colorTheme = r.Next(10);
-            if (usedColors.Contains(colorTheme))
-                return GetColors();
-            usedColors.Add(colorTheme);
-            usedColorsCounter++;
-            return colorTheme;
         }
     }
 

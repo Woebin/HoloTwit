@@ -3,6 +3,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Core;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -18,35 +19,24 @@ namespace HoloTwit2
     {
         public string SearchTerm { get; private set; }
         public bool AutoRefreshing { get; private set; } = false;
-        public int ColorThemeNumber { get; private set; }
 
-        private SolidColorBrush[] BackgroundColors = new SolidColorBrush[10] {
-            new SolidColorBrush(Windows.UI.Colors.DarkMagenta),
-            new SolidColorBrush(Windows.UI.Colors.DarkOrchid),
-            new SolidColorBrush(Windows.UI.Colors.DarkRed),
-            new SolidColorBrush(Windows.UI.Colors.Green),
-            new SolidColorBrush(Windows.UI.Colors.DarkViolet),
-            new SolidColorBrush(Windows.UI.Colors.Purple),
-            new SolidColorBrush(Windows.UI.Colors.DarkOliveGreen),
-            new SolidColorBrush(Windows.UI.Colors.Brown),
-            new SolidColorBrush(Windows.UI.Colors.DarkGray),
-            new SolidColorBrush(Windows.UI.Colors.DarkBlue),
-        };
+        private Random rnd = new Random();
 
-        public SearchResults(string searchTerm, int colorTheme)
+        public SearchResults(string searchTerm)
         {
             this.InitializeComponent();
             this.SearchTerm = searchTerm;
-            this.ColorThemeNumber = colorTheme;
+            RandomizeBackground();
             Search();
+        }
+
+        private void RandomizeBackground()
+        {
+            SearchResultsListView.Background = new SolidColorBrush(Color.FromArgb(255, (byte)rnd.Next(60), (byte)rnd.Next(60), (byte)rnd.Next(60)));
         }
 
         private async void Search()
         {
-            if (ColorThemeNumber != -1)
-            {
-                SearchResultsListView.Background = BackgroundColors[ColorThemeNumber];
-            }
             SearchResultsListView.ItemsSource = await TwitterService.Instance.SearchAsync(this.SearchTerm, 50);
         }
 
@@ -99,7 +89,7 @@ namespace HoloTwit2
                 var newAppView = ApplicationView.GetForCurrentView();
                 newAppView.Title = SearchTerm;
 
-                newWindow.Content = new SearchResults(SearchTerm, ColorThemeNumber);
+                newWindow.Content = new SearchResults(SearchTerm);
                 newWindow.Activate();
 
                 await ApplicationViewSwitcher.TryShowAsStandaloneAsync(
@@ -108,6 +98,11 @@ namespace HoloTwit2
                     currentApplicationView.Id,
                     ViewSizePreference.UseMinimum);
             });
+        }
+
+        private void RandomizeBackgroundButton_Click(object sender, RoutedEventArgs e)
+        {
+            RandomizeBackground();
         }
     }
 }
