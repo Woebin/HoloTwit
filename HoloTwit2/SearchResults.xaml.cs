@@ -20,19 +20,33 @@ namespace HoloTwit2
         public string SearchTerm { get; private set; }
         public bool AutoRefreshing { get; private set; } = false;
 
+        private int minColor, maxColor;
         private Random rnd = new Random();
 
         public SearchResults(string searchTerm)
         {
             this.InitializeComponent();
             this.SearchTerm = searchTerm;
+            if (Application.Current.RequestedTheme == ApplicationTheme.Dark)
+            {
+                minColor = 0;
+                maxColor = 127;
+            }
+            else
+            {
+                minColor = 128;
+                maxColor = 255;
+            }
             RandomizeBackground();
             Search();
         }
 
         private void RandomizeBackground()
         {
-            SearchResultsListView.Background = new SolidColorBrush(Color.FromArgb(255, (byte)rnd.Next(60), (byte)rnd.Next(60), (byte)rnd.Next(60)));
+            SearchResultsListView.Background = new SolidColorBrush(Color.FromArgb(255,
+                (byte)rnd.Next(minColor, maxColor),
+                (byte)rnd.Next(minColor, maxColor),
+                (byte)rnd.Next(minColor, maxColor)));
         }
 
         private async void Search()

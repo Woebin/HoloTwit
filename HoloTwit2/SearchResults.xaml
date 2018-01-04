@@ -65,14 +65,12 @@
 
                         <StackPanel Width="240">
 
-                            <TextBlock Foreground="Orange"
-                                       FontSize="18">
+                            <TextBlock FontSize="20">
                                 @<Run Text="{Binding User.ScreenName}" />
                             </TextBlock>
 
                             <TextBlock FontWeight="Bold" 
-                                       Foreground="Orange"
-                                       FontSize="18"
+                                       FontSize="20"
                                        Text="{Binding User.Name}" />
 
                             <TextBlock Text="{Binding Text}"
