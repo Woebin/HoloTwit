@@ -21,29 +21,16 @@ namespace HoloTwit2
         public int ColorThemeNumber { get; private set; }
 
         private SolidColorBrush[] BackgroundColors = new SolidColorBrush[10] {
-            new SolidColorBrush(Windows.UI.Colors.Black),
-            new SolidColorBrush(Windows.UI.Colors.White),
-            new SolidColorBrush(Windows.UI.Colors.Blue),
-            new SolidColorBrush(Windows.UI.Colors.Red),
+            new SolidColorBrush(Windows.UI.Colors.DarkMagenta),
+            new SolidColorBrush(Windows.UI.Colors.DarkOrchid),
+            new SolidColorBrush(Windows.UI.Colors.DarkRed),
             new SolidColorBrush(Windows.UI.Colors.Green),
-            new SolidColorBrush(Windows.UI.Colors.Yellow),
-            new SolidColorBrush(Windows.UI.Colors.Gray),
+            new SolidColorBrush(Windows.UI.Colors.DarkViolet),
             new SolidColorBrush(Windows.UI.Colors.Purple),
-            new SolidColorBrush(Windows.UI.Colors.Pink),
-            new SolidColorBrush(Windows.UI.Colors.Orange)
-        };
-
-        private SolidColorBrush[] ForegroundColors = new SolidColorBrush[10] {
-            new SolidColorBrush(Windows.UI.Colors.White),
-            new SolidColorBrush(Windows.UI.Colors.Black),
-            new SolidColorBrush(Windows.UI.Colors.Red),
-            new SolidColorBrush(Windows.UI.Colors.Blue),
-            new SolidColorBrush(Windows.UI.Colors.Yellow),
-            new SolidColorBrush(Windows.UI.Colors.Green),
-            new SolidColorBrush(Windows.UI.Colors.Purple),
-            new SolidColorBrush(Windows.UI.Colors.Gray),
-            new SolidColorBrush(Windows.UI.Colors.Orange),
-            new SolidColorBrush(Windows.UI.Colors.Pink)
+            new SolidColorBrush(Windows.UI.Colors.DarkOliveGreen),
+            new SolidColorBrush(Windows.UI.Colors.Brown),
+            new SolidColorBrush(Windows.UI.Colors.DarkGray),
+            new SolidColorBrush(Windows.UI.Colors.DarkBlue),
         };
 
         public SearchResults(string searchTerm, int colorTheme)
