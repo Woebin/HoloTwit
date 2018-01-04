@@ -5,6 +5,7 @@
 using Microsoft.Toolkit.Uwp.Services.Twitter;
 using Microsoft.Toolkit.Uwp.UI.Controls;
 using System;
+using System.Collections.Generic;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -16,6 +17,10 @@ namespace HoloTwit2
         private string ConsumerKey { get; set; } = "PLACEKEYHERE";
         private string ConsumerSecret { get; set; } = "PLACESECRETHERE";
         private string CallbackUri { get; set; } = "http://faketrash.placeholder.cx";
+
+        private List<int> usedColors = new List<int>();
+        private int usedColorsCounter = 0;
+        private Random r = new Random();
 
         public MainPage()
         {
@@ -51,8 +56,10 @@ namespace HoloTwit2
             if (await TwitterService.Instance.LoginAsync())
             {
                 ShowMainInterface();
-            } else {
-                var msg = new MessageDialog("Login failed", "Error");
+            }
+            else
+            {
+                var msg = new MessageDialog("Login failed!", "Error");
                 await msg.ShowAsync();
             }
         }
@@ -61,7 +68,7 @@ namespace HoloTwit2
         {
             if (!string.IsNullOrWhiteSpace(SearchField.Text) && !string.IsNullOrEmpty(SearchField.Text))
             {
-                SearchResults searchResults = new SearchResults(SearchField.Text);
+                SearchResults searchResults = new SearchResults(SearchField.Text, GetColors());
                 await searchResults.DetachFeed();
             }
         }
@@ -96,6 +103,18 @@ namespace HoloTwit2
         {
             SearchPanel.Visibility = Visibility.Collapsed;
             TwitterLoginButton.Visibility = Visibility.Visible;
+        }
+
+        public int GetColors()
+        {
+            if (usedColorsCounter >= 10)
+                return -1;
+            int colorTheme = r.Next(10);
+            if (usedColors.Contains(colorTheme))
+                return GetColors();
+            usedColors.Add(colorTheme);
+            usedColorsCounter++;
+            return colorTheme;
         }
     }
 

@@ -8,6 +8,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media;
 
 // The User Control item template is documented at https://go.microsoft.com/fwlink/?LinkId=234236
 
@@ -17,16 +18,48 @@ namespace HoloTwit2
     {
         public string SearchTerm { get; private set; }
         public bool AutoRefreshing { get; private set; } = false;
+        public int ColorThemeNumber { get; private set; }
 
-        public SearchResults(string searchTerm)
+        private SolidColorBrush[] BackgroundColors = new SolidColorBrush[10] {
+            new SolidColorBrush(Windows.UI.Colors.Black),
+            new SolidColorBrush(Windows.UI.Colors.White),
+            new SolidColorBrush(Windows.UI.Colors.Blue),
+            new SolidColorBrush(Windows.UI.Colors.Red),
+            new SolidColorBrush(Windows.UI.Colors.Green),
+            new SolidColorBrush(Windows.UI.Colors.Yellow),
+            new SolidColorBrush(Windows.UI.Colors.Gray),
+            new SolidColorBrush(Windows.UI.Colors.Purple),
+            new SolidColorBrush(Windows.UI.Colors.Pink),
+            new SolidColorBrush(Windows.UI.Colors.Orange)
+        };
+
+        private SolidColorBrush[] ForegroundColors = new SolidColorBrush[10] {
+            new SolidColorBrush(Windows.UI.Colors.White),
+            new SolidColorBrush(Windows.UI.Colors.Black),
+            new SolidColorBrush(Windows.UI.Colors.Red),
+            new SolidColorBrush(Windows.UI.Colors.Blue),
+            new SolidColorBrush(Windows.UI.Colors.Yellow),
+            new SolidColorBrush(Windows.UI.Colors.Green),
+            new SolidColorBrush(Windows.UI.Colors.Purple),
+            new SolidColorBrush(Windows.UI.Colors.Gray),
+            new SolidColorBrush(Windows.UI.Colors.Orange),
+            new SolidColorBrush(Windows.UI.Colors.Pink)
+        };
+
+        public SearchResults(string searchTerm, int colorTheme)
         {
             this.InitializeComponent();
             this.SearchTerm = searchTerm;
+            this.ColorThemeNumber = colorTheme;
             Search();
         }
 
         private async void Search()
         {
+            if (ColorThemeNumber != -1)
+            {
+                SearchResultsListView.Background = BackgroundColors[ColorThemeNumber];
+            }
             SearchResultsListView.ItemsSource = await TwitterService.Instance.SearchAsync(this.SearchTerm, 50);
         }
 
@@ -79,7 +112,7 @@ namespace HoloTwit2
                 var newAppView = ApplicationView.GetForCurrentView();
                 newAppView.Title = SearchTerm;
 
-                newWindow.Content = new SearchResults(SearchTerm);
+                newWindow.Content = new SearchResults(SearchTerm, ColorThemeNumber);
                 newWindow.Activate();
 
                 await ApplicationViewSwitcher.TryShowAsStandaloneAsync(
