@@ -80,6 +80,12 @@ namespace HoloTwit2
             }
         }
 
+        private void TwitterLogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            TwitterService.Instance.Logout();
+            HideMainInterface();
+        }
+
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
             Search();
@@ -91,12 +97,6 @@ namespace HoloTwit2
             {
                 Search();
             }
-        }
-
-        private void TwitterLogoutButton_Click(object sender, RoutedEventArgs e)
-        {
-            TwitterService.Instance.Logout();
-            HideMainInterface();
         }
     }
 }
