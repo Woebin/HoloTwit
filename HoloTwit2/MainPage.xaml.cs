@@ -21,6 +21,7 @@ namespace HoloTwit2
         {
             this.InitializeComponent();
 
+            // Check if Twitter account is already active, if so bypass login.
             if (IsTwitterAccountActive())
             {
                 ShowMainInterface();
@@ -45,6 +46,27 @@ namespace HoloTwit2
             }
         }
 
+        private async void Search()
+        {
+            if (!string.IsNullOrWhiteSpace(SearchField.Text) && !string.IsNullOrEmpty(SearchField.Text))
+            {
+                SearchResults searchResults = new SearchResults(SearchField.Text);
+                await searchResults.DetachFeed();
+            }
+        }
+
+        private void ShowMainInterface()
+        {
+            SearchPanel.Visibility = Visibility.Visible;
+            TwitterLoginButton.Visibility = Visibility.Collapsed;
+        }
+
+        private void HideMainInterface()
+        {
+            SearchPanel.Visibility = Visibility.Collapsed;
+            TwitterLoginButton.Visibility = Visibility.Visible;
+        }
+
         private async void TwitterLoginButton_Click(object sender, RoutedEventArgs e)
         {
             TwitterService.Instance.Initialize(ConsumerKey, ConsumerSecret, CallbackUri);
@@ -54,17 +76,8 @@ namespace HoloTwit2
             }
             else
             {
-                var msg = new MessageDialog("Login failed!", "Error");
+                var msg = new MessageDialog("Login failed!", "Error"); // Terrible and unhelpful error message.
                 await msg.ShowAsync();
-            }
-        }
-
-        private async void Search()
-        {
-            if (!string.IsNullOrWhiteSpace(SearchField.Text) && !string.IsNullOrEmpty(SearchField.Text))
-            {
-                SearchResults searchResults = new SearchResults(SearchField.Text);
-                await searchResults.DetachFeed();
             }
         }
 
@@ -86,18 +99,6 @@ namespace HoloTwit2
         {
             TwitterService.Instance.Logout();
             HideMainInterface();
-        }
-
-        private void ShowMainInterface()
-        {
-            SearchPanel.Visibility = Visibility.Visible;
-            TwitterLoginButton.Visibility = Visibility.Collapsed;
-        }
-
-        private void HideMainInterface()
-        {
-            SearchPanel.Visibility = Visibility.Collapsed;
-            TwitterLoginButton.Visibility = Visibility.Visible;
         }
     }
 

@@ -8,7 +8,7 @@
   xmlns:local="using:HoloTwit2"
   mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid>
         <Grid Name="SearchPanel" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*" />
@@ -17,29 +17,30 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBox Name="SearchField" 
-                                 FontSize="22"
-                                 Margin="5, 5, 5, 0"  
-                                 MinWidth="140" 
-                                 Height="36"
-                                 KeyUp="SearchField_KeyUp"/>
+                         FontSize="22"
+                         Margin="5, 5, 5, 0"  
+                         MinWidth="140" 
+                         Height="36"
+                         KeyUp="SearchField_KeyUp"
+                         MaxLength="100"/>
                 <Button Name="SearchButton" 
-                                Margin="0, 5, 5, 0" 
-                                Click="SearchButton_Click" 
-                                FontFamily="Segoe MDL2 Assets"
-                                Content="&#xE11A;"
-                                FontSize="36"
-                                MinHeight="36"
-                                ToolTipService.ToolTip="Search"/>
+                        Margin="0, 5, 5, 0" 
+                        Click="SearchButton_Click" 
+                        FontFamily="Segoe MDL2 Assets"
+                        Content="&#xE11A;"
+                        FontSize="36"
+                        MinHeight="36"
+                        ToolTipService.ToolTip="Search"/>
 
             </StackPanel>
 
             <Button Name="LogoutButton"
-                            Click="TwitterLogoutButton_Click" 
-                            FontFamily="Segoe MDL2 Assets"
-                            FontSize="36"
-                            MinHeight="36"
-                            Content="&#xEC25;"
-                            ToolTipService.ToolTip="Log out"
+                    Click="TwitterLogoutButton_Click" 
+                    FontFamily="Segoe MDL2 Assets"
+                    FontSize="36"
+                    MinHeight="36"
+                    Content="&#xEC25;"
+                    ToolTipService.ToolTip="Log out"
                     HorizontalAlignment="Right"
                     Grid.Row="1"/>
 
