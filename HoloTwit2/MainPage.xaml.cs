@@ -4,7 +4,6 @@
 
 using Microsoft.Toolkit.Uwp.Services.Twitter;
 using System;
-using System.Collections.Generic;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -86,7 +85,6 @@ namespace HoloTwit2
             Search();
         }
 
-
         private void SearchField_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
             if (e.Key == Windows.System.VirtualKey.Enter)
@@ -101,5 +99,4 @@ namespace HoloTwit2
             HideMainInterface();
         }
     }
-
 }

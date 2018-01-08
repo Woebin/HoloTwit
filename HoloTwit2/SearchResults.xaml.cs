@@ -19,7 +19,6 @@ namespace HoloTwit2
     {
         public string SearchTerm { get; private set; }
         public bool AutoRefreshing { get; private set; } = false;
-
         private int minColor, maxColor;
         private Random rnd = new Random();
 
@@ -27,12 +26,12 @@ namespace HoloTwit2
         {
             this.InitializeComponent();
             this.SearchTerm = searchTerm;
-            if (Application.Current.RequestedTheme == ApplicationTheme.Dark)
+            if (Application.Current.RequestedTheme == ApplicationTheme.Dark) // Set background color range to match dark theme.
             {
                 minColor = 0;
                 maxColor = 127;
             }
-            else
+            else // Set background color range to match light theme.
             {
                 minColor = 128;
                 maxColor = 255;
@@ -41,6 +40,7 @@ namespace HoloTwit2
             Search();
         }
 
+        // Set background color for search feed.
         private void RandomizeBackground()
         {
             SearchResultsListView.Background = new SolidColorBrush(Color.FromArgb(255,
@@ -82,7 +82,8 @@ namespace HoloTwit2
             Search();
         }
 
-        // Toggle automatic refresh of search results, done every X seconds (20 as of this comment).
+        // Toggle automatic refresh of search results.
+        // When enabled, refresh every X seconds (20 as of this comment).
         private async void AutoRefreshToggle_Click(object sender, RoutedEventArgs e)
         {
             AutoRefreshing = !AutoRefreshing;
