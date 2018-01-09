@@ -12,23 +12,17 @@ namespace HoloTwit2
 {
     public sealed partial class MainPage : Page
     {
-        private string ConsumerKey { get; set; } = "PLACEKEYHERE";
-        private string ConsumerSecret { get; set; } = "PLACESECRETHERE";
-        private string CallbackUri { get; set; } = "http://faketrash.placeholder.cx";
+        private string consumerKey = "PLACEKEYHERE";
+        private string consumerSecret  = "PLACESECRETHERE";
+        private string callbackUri  = "http://faketrash.placeholder.cx";
 
         public MainPage()
         {
             this.InitializeComponent();
 
-            // Check if Twitter account is already active, if so bypass login.
-            if (IsTwitterAccountActive())
-            {
-                ShowMainInterface();
-            }
-            else
-            {
-                HideMainInterface();
-            }
+            // Check if Twitter account is already active; if so, bypass login.
+            if (IsTwitterAccountActive()) { ShowMainInterface(); }
+            else { HideMainInterface(); }
         }
 
         private bool IsTwitterAccountActive()
@@ -68,11 +62,8 @@ namespace HoloTwit2
 
         private async void TwitterLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            TwitterService.Instance.Initialize(ConsumerKey, ConsumerSecret, CallbackUri);
-            if (await TwitterService.Instance.LoginAsync())
-            {
-                ShowMainInterface();
-            }
+            TwitterService.Instance.Initialize(consumerKey, consumerSecret, callbackUri);
+            if (await TwitterService.Instance.LoginAsync()) { ShowMainInterface(); }
             else
             {
                 var msg = new MessageDialog("Login failed!", "Error"); // Terrible and unhelpful error message.
@@ -86,17 +77,11 @@ namespace HoloTwit2
             HideMainInterface();
         }
 
-        private void SearchButton_Click(object sender, RoutedEventArgs e)
-        {
-            Search();
-        }
+        private void SearchButton_Click(object sender, RoutedEventArgs e) { Search(); }
 
         private void SearchField_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
         {
-            if (e.Key == Windows.System.VirtualKey.Enter)
-            {
-                Search();
-            }
+            if (e.Key == Windows.System.VirtualKey.Enter) { Search(); }
         }
     }
 }

@@ -17,15 +17,15 @@ namespace HoloTwit2
 {
     public sealed partial class SearchResults : UserControl
     {
-        public string SearchTerm { get; private set; }
-        public bool AutoRefreshing { get; private set; } = false;
+        private string searchTerm;
+        private bool autoRefreshing = false;
         private int minColor, maxColor;
         private Random rnd = new Random();
 
         public SearchResults(string searchTerm)
         {
             this.InitializeComponent();
-            this.SearchTerm = searchTerm;
+            this.searchTerm = searchTerm;
             if (Application.Current.RequestedTheme == ApplicationTheme.Dark) // Set background color range to match dark theme.
             {
                 minColor = 0;
@@ -51,7 +51,7 @@ namespace HoloTwit2
 
         private async void Search()
         {
-            SearchResultsListView.ItemsSource = await TwitterService.Instance.SearchAsync(this.SearchTerm, 50);
+            SearchResultsListView.ItemsSource = await TwitterService.Instance.SearchAsync(this.searchTerm, 50);
         }
 
         // Open selected feed in new window.
@@ -64,9 +64,9 @@ namespace HoloTwit2
             {
                 var newWindow = Window.Current;
                 var newAppView = ApplicationView.GetForCurrentView();
-                newAppView.Title = SearchTerm;
+                newAppView.Title = searchTerm;
 
-                newWindow.Content = new SearchResults(SearchTerm);
+                newWindow.Content = new SearchResults(searchTerm);
                 newWindow.Activate();
 
                 await ApplicationViewSwitcher.TryShowAsStandaloneAsync(
@@ -77,27 +77,21 @@ namespace HoloTwit2
             });
         }
 
-        private void RefreshFeedButton_Click(object sender, RoutedEventArgs e)
-        {
-            Search();
-        }
+        private void RefreshFeedButton_Click(object sender, RoutedEventArgs e) { Search(); }
+        private void RandomizeBackgroundButton_Click(object sender, RoutedEventArgs e) { RandomizeBackground(); }
 
         // Toggle automatic refresh of search results.
         // When enabled, refresh every X seconds (20 as of this comment).
         private async void AutoRefreshToggle_Click(object sender, RoutedEventArgs e)
         {
-            AutoRefreshing = !AutoRefreshing;
-            while (AutoRefreshing)
+            autoRefreshing = !autoRefreshing;
+            while (autoRefreshing)
             {
                 await Task.Delay(20000);
                 Search();
             }
         }
 
-        private void RandomizeBackgroundButton_Click(object sender, RoutedEventArgs e)
-        {
-            RandomizeBackground();
-        }
 
         // Bring out context menu when right-clicking on a tweet. From https://msdn.microsoft.com/en-us/magazine/mt793275.aspx
         private void SearchResultsListView_RightTapped(object sender, RightTappedRoutedEventArgs e)
