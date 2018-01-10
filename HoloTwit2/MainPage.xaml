@@ -17,14 +17,15 @@
 
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                 <TextBox Name="SearchField" 
-                         FontSize="22"
+                         FontSize="20"
                          Margin="5, 5, 5, 0"  
                          MinWidth="140" 
                          Height="36"
                          KeyUp="SearchField_KeyUp"
-                         MaxLength="100"/>
+                         MaxLength="100"
+                         PlaceholderText="Search..."/>
                 <Button Name="SearchButton" 
-                        Margin="0, 5, 5, 0" 
+                        Margin="0, 0, 0, 0" 
                         Click="SearchButton_Click" 
                         FontFamily="Segoe MDL2 Assets"
                         Content="&#xE11A;"
