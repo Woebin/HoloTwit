@@ -20,7 +20,7 @@ namespace HoloTwit2
         private string searchTerm;
         private bool autoRefreshing = false;
         private int minColor, maxColor;
-        private Random rnd = new Random();
+        private Random random = new Random();
 
         public SearchResults(string searchTerm)
         {
@@ -44,9 +44,9 @@ namespace HoloTwit2
         private void RandomizeBackground()
         {
             SearchResultsListView.Background = new SolidColorBrush(Color.FromArgb(255,
-                (byte)rnd.Next(minColor, maxColor),
-                (byte)rnd.Next(minColor, maxColor),
-                (byte)rnd.Next(minColor, maxColor)));
+                (byte)random.Next(minColor, maxColor),
+                (byte)random.Next(minColor, maxColor),
+                (byte)random.Next(minColor, maxColor)));
         }
 
         private async void Search()
@@ -110,7 +110,7 @@ namespace HoloTwit2
             {
                 RequestedOperation = DataPackageOperation.Copy
             };
-            dataPackage.SetText($"@{tweet.User.ScreenName}: {tweet.Text} ");
+            dataPackage.SetText($"@{tweet.User.ScreenName}: {tweet.Text} ({tweet.CreationDate})");
             Clipboard.SetContent(dataPackage);
         }
     }

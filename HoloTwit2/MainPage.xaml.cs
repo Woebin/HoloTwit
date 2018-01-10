@@ -12,9 +12,10 @@ namespace HoloTwit2
 {
     public sealed partial class MainPage : Page
     {
+        // These values shouldn't be stored here, obviously, but they are for now. Paste in valid key / secret before building.
         private string consumerKey = "PLACEKEYHERE";
-        private string consumerSecret  = "PLACESECRETHERE";
-        private string callbackUri  = "http://faketrash.placeholder.cx";
+        private string consumerSecret = "PLACESECRETHERE";
+        private string callbackUri = "http://faketrash.placeholder.cx";
 
         public MainPage()
         {
@@ -62,12 +63,16 @@ namespace HoloTwit2
 
         private async void TwitterLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            TwitterService.Instance.Initialize(consumerKey, consumerSecret, callbackUri);
-            if (await TwitterService.Instance.LoginAsync()) { ShowMainInterface(); }
+            if (consumerKey.Equals("PLACEKEYHERE") || consumerSecret.Equals("PLACESECRETHERE")) // Show error message and fail login if consumer key & secret are wrong.
+            {
+                var errorMessage = new MessageDialog("Placeholder API keys found, you need to change them to valid ones.", "Error");
+                await errorMessage.ShowAsync();
+            }
             else
             {
-                var msg = new MessageDialog("Login failed!", "Error"); // Terrible and unhelpful error message.
-                await msg.ShowAsync();
+                TwitterService.Instance.Initialize(consumerKey, consumerSecret, callbackUri);
+                await TwitterService.Instance.LoginAsync();
+                ShowMainInterface();
             }
         }
 
